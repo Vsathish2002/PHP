@@ -1,15 +1,15 @@
 <?php
 $students = [
-    ["id" => 101, "name" => "Alice",   "mark1" => 85, "mark2" => 90, "mark3" => 78, "status" => "Pass"],
-    ["id" => 102, "name" => "Bob",     "mark1" => 72, "mark2" => 68, "mark3" => 75, "status" => "Pass"],
-    ["id" => 103, "name" => "Charlie", "mark1" => 60, "mark2" => 55, "mark3" => 62, "status" => "Pass"],
-    ["id" => 104, "name" => "David",   "mark1" => 90, "mark2" => 88, "mark3" => 92, "status" => "Pass"],
-    ["id" => 105, "name" => "Eva",     "mark1" => 68, "mark2" => 70, "mark3" => 65, "status" => "Pass"],
-    ["id" => 106, "name" => "Frank",   "mark1" => 65, "mark2" => 80, "mark3" => 20, "status" => "Fail"],
-    ["id" => 107, "name" => "Grace",   "mark1" => 38, "mark2" => 42, "mark3" => 35, "status" => "Fail"],
-    ["id" => 108, "name" => "Helen",   "mark1" => 82, "mark2" => 85, "mark3" => 80, "status" => "Pass"],
-    ["id" => 109, "name" => "Ian",     "mark1" => 67, "mark2" => 87, "mark3" => 25, "status" => "Fail"],
-    ["id" => 110, "name" => "Jane",    "mark1" => 72, "mark2" => 90, "mark3" => 17, "status" => "Fail"]
+    ["id" => 101, "name" => "Alice",   "mark1" => 85, "mark2" => 30, "mark3" => 78 ],
+    ["id" => 102, "name" => "Bob",     "mark1" => 72, "mark2" => 68, "mark3" => 75],
+    ["id" => 103, "name" => "Charlie", "mark1" => 60, "mark2" => 55, "mark3" => 62],
+    ["id" => 104, "name" => "David",   "mark1" => 90, "mark2" => 88, "mark3" => 92],
+    ["id" => 105, "name" => "Eva",     "mark1" => 68, "mark2" => 70, "mark3" => 65],
+    ["id" => 106, "name" => "Frank",   "mark1" => 65, "mark2" => 80, "mark3" => 20],
+    ["id" => 107, "name" => "Grace",   "mark1" => 38, "mark2" => 42, "mark3" => 35],
+    ["id" => 108, "name" => "Helen",   "mark1" => 82, "mark2" => 85, "mark3" => 80],
+    ["id" => 109, "name" => "Ian",     "mark1" => 67, "mark2" => 87, "mark3" => 25],
+    ["id" => 110, "name" => "Jane",    "mark1" => 72, "mark2" => 90, "mark3" => 17]
 ];
 
 echo "Students Mark Details";
@@ -20,7 +20,6 @@ echo "<tr>
         <th>Mark1</th>
         <th>Mark2</th>
         <th>Mark3</th>
-        <th>Status</th>
       </tr>";
 
 for ($i = 0; $i < count($students); $i++) {
@@ -30,7 +29,6 @@ for ($i = 0; $i < count($students); $i++) {
             <td>{$students[$i]['mark1']}</td>
             <td>{$students[$i]['mark2']}</td>
             <td>{$students[$i]['mark3']}</td>
-            <td>{$students[$i]['status']}</td>
           </tr>";
 }
 
