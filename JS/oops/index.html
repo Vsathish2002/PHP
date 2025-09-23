@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // Base Class
+        class Book {
+            constructor(title, author, id) {
+                this.title = title;
+                this.author = author;
+                this.id = id;
+                this.isIssued = false;
+            }
+
+            getDetails() {
+                return `${this.title} by ${this.author} [${this.isIssued ? "Issued" : "Available"}]`;
+            }
+        }
+
+        // Encapsulation: Library manages its own data
+        class Library {
+            #books = [];
+
+            addBook(book) {
+                this.#books.push(book);
+            }
+
+            issueBook(bookId) {
+                const book = this.#books.find(b => b.id === bookId);
+                if (book && !book.isIssued) {
+                    book.isIssued = true;
+                    return `${book.title} has been issued.`;
+                } else {
+                    return `Book not available!`;
+                }
+            }
+
+            showBooks() {
+                return this.#books.map(b => b.getDetails()).join("\n");
+            }
+        }
+
+        // Base Member class
+        class Member {
+            constructor(name, id) {
+                this.name = name;
+                this.id = id;
+            }
+
+            getDetails() {
+                return `Member: ${this.name} (ID: ${this.id})`;
+            }
+        }
+
+        // Inheritance + Polymorphism
+        class Student extends Member {
+            getDetails() {
+                return `Student: ${this.name} (ID: ${this.id})`;
+            }
+        }
+
+        class Teacher extends Member {
+            getDetails() {
+                return `Teacher: ${this.name} (ID: ${this.id})`;
+            }
+        }
+
+        // --- Usage Example ---
+        const library = new Library();
+
+        const book1 = new Book("JavaScript Basics", "John Doe", 1);
+        const book2 = new Book("OOP in JS", "Jane Smith", 2);
+
+        library.addBook(book1);
+        library.addBook(book2);
+
+        console.log("📚 Books in Library:");
+        console.log(library.showBooks());
+
+        console.log("\n🔹 Issue a Book:");
+        console.log(library.issueBook(1));
+
+        console.log("\n📚 Books After Issue:");
+        console.log(library.showBooks());
+
+        const student = new Student("Sathish", 101);
+        const teacher = new Teacher("Mr. Kumar", 201);
+
+        console.log("\n👨‍🎓 Member Details:");
+        console.log(student.getDetails());
+        console.log(teacher.getDetails());
+
+    </script>
+
+</body>
+
+</html>

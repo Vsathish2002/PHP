@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Window & Document Events Demo</title>
+  <style>
+    body {
+      height: 2000px; /* To enable scrolling */
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #output {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #f0f0f0;
+      border: 1px solid #333;
+      padding: 10px;
+      width: 250px;
+      font-size: 14px;
+    }
+    #dragBox {
+    width: 100px;
+    height: 100px;
+    background-color: lightcoral;
+    margin: 20px;
+    text-align: center;
+    line-height: 100px;
+    cursor: grab;
+  }
+  #dropArea {
+    width: 300px;
+    height: 200px;
+    border: 2px dashed #333;
+    text-align: center;
+    line-height: 200px;
+    margin: 20px;
+  }
+  </style>
+</head>
+<body>
+
+  <h1>Window & Document Events Demo</h1>
+  <p>Resize the window, scroll the page, or reload/leave the page to see events in action.</p>
+  <div id="output">Event messages will appear here.</div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    document.addEventListener("DOMContentLoaded", () => {
+      output.innerText = "DOM fully loaded and parsed!";
+      console.log("DOM fully loaded and parsed!");
+    });
+
+    window.onload = () => {
+      output.innerText = "Page fully loaded (onload)!";
+    };
+
+    window.onresize = () => {
+      output.innerText = `Window resized: ${window.innerWidth} x ${window.innerHeight}`;
+    };
+
+    window.onscroll = () => {
+      output.innerText = `Scroll position: ${window.scrollY}px`;
+    };
+
+    window.onunload = () => {
+      console.log("User is leaving the page!");
+    };
+  </script>
+
+
+
+<textarea id="myText" rows="5" cols="40" placeholder="Try copy, cut, or paste here"></textarea>
+<p id="clipOutput"></p>
+
+<script>
+const myText = document.getElementById("myText");
+const clipOutput = document.getElementById("clipOutput");
+
+myText.oncopy = () => {
+  clipOutput.innerText = "Text copied!";
+};
+
+myText.oncut = () => {
+  clipOutput.innerText = "Text cut!";
+};
+
+myText.onpaste = (e) => {
+  const pastedText = (e.clipboardData || window.clipboardData).getData("text");
+  clipOutput.innerText = `Text pasted: ${pastedText}`;
+};
+
+</script>
+
+<div id="dragBox" draggable="true">Drag Me</div>
+<div id="dropArea">Drop Here</div>
+<p id="output1"></p>
+
+<script>
+const dragBox = document.getElementById("dragBox");
+const dropArea = document.getElementById("dropArea");
+const output1 = document.getElementById("output1");
+
+dragBox.ondragstart = (e) => {
+  e.dataTransfer.setData("text", e.target.id);
+  output1.innerText = "Dragging started!";
+};
+
+dropArea.ondragover = (e) => {
+  e.preventDefault();
+  output1.innerText = "Dragging over drop area!";
+};
+
+dropArea.ondrop = (e) => {
+  e.preventDefault();
+  const data = e.dataTransfer.getData("text");
+  const draggedElement = document.getElementById(data);
+  dropArea.appendChild(draggedElement);
+  output1.innerText = "Dropped successfully!";
+};
+
+dragBox.ondragend = () => {
+  output1.innerText = "Drag ended!";
+};
+</script>
+
+
+</body>
+</html> 
+

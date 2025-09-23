@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calss and Object</title>
+</head>
+<body>
+    <h2>Class and Object</h2>
+    <p id="demo"></p>
+    <script>
+        class school{  //Class
+            std_count(mark){
+                this.mark=mark;
+                return 100-this.mark;
+            }
+        }
+        const myschool=new school(); //Object created
+        document.getElementById("demo").innerHTML="My mark is "+myschool.std_count(90);
+    </script>
+    
+</body>
+</html>

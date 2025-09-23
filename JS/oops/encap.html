@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encapsulation Demo</title>
+</head>
+<body>
+  <h2>Bank Account</h2>
+  <p id="demo"></p>
+
+  <script>
+    class BankAccount {
+      #balance = 0; 
+
+      constructor(owner) {
+        this.owner = owner; 
+      }
+
+      deposit(amount) {
+        if(amount > 0) {
+          this.#balance += amount;
+          return `Deposited ₹${amount}`;
+        } else {
+          return "Invalid deposit amount";
+        }
+      }
+
+      withdraw(amount) {
+        if(amount > 0 && amount <= this.#balance) {
+          this.#balance -= amount;
+          return `Withdrew ₹${amount}`;
+        } else {
+          return "Insufficient balance or invalid amount";
+        }
+      }
+
+      getBalance() {
+        return `Balance for ${this.owner}: ₹${this.#balance}`;
+      }
+    }
+
+    const acc = new BankAccount("Karthi");
+
+    const demo = document.getElementById('demo');
+    demo.innerHTML = acc.deposit(1000) + "<br>" +
+                     acc.withdraw(500) + "<br>" +
+                     acc.getBalance() + "<br>";
+
+  
+  </script>
+</body>
+</html>

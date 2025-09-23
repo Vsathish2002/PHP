@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymorphism Demo</title>
+</head>
+<body>
+    <h2>Vehicle Actions</h2>
+    <p id="demo"></p>
+
+    <script>
+        // Parent class
+        class Vehicle {
+            move() {
+                return "Vehicle is moving.";
+            }
+        }
+
+        // Child class 1
+        class Car extends Vehicle {
+            move() {
+                return "Car is driving on the road.";
+            }
+        }
+
+        // Child class 2
+        class Bike extends Vehicle {
+            move() {
+                return "Bike is speeding on the highway.";
+            }
+        }
+
+        const demo = document.getElementById("demo");
+        const vehicle = new Vehicle();
+        const car = new Car();
+        const bike = new Bike();
+        demo.innerHTML = vehicle.move() + "<br>" +
+                         car.move() + "<br>" +
+                         bike.move();
+    </script>
+</body>
+</html>
