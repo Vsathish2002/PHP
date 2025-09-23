@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Events Demo</title>
+  <style>
+     button {
+      width: 200px;
+      height: 60px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: lightblue;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+     input {
+      padding: 10px;
+      font-size: 18px;
+      width: 300px;
+    }
+    p {
+      font-size: 20px;
+      color: darkblue;
+    }
+       input, select, textarea, #submit {
+      display: block;
+      margin: 15px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    p {
+      font-size: 18px;
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+    <span>mouse click event</span><button id="box">clcik me</button><br>
+   <span>mouse Double click event</span> <button id="box1">clcik me</button><br>
+    <span>mouse over event</span><button id="box2">clcik me</button><br>
+    <span>mouse moving  event</span><button id="box3">clcik me</button><br>
+      <span>mouse out event</span><button id="box4">clcik me</button><br>
+    <span>mouse down event</span><button id="box5">clcik me</button><br>
+    <span>mouse up event</span><button id="box6">clcik me</button><br>
+
+  <h2>Keyboard Events Demo</h2>
+  <input type="text" id="myInput" placeholder="Type something..." />
+  <p id="output">Event Output will appear here</p>
+
+    <script>
+    const box = document.getElementById("box");
+    
+    const box1 = document.getElementById("box1");
+    const box2 = document.getElementById("box2");
+    const box3 = document.getElementById("box3");
+    const box4 = document.getElementById("box4");
+    const box5 = document.getElementById("box5");
+    const box6 = document.getElementById("box6");
+
+    box.onclick = () => {
+      box.innerText = "You clicked me!";
+      box.style.backgroundColor = "lightgreen";
+    };
+
+    box1.ondblclick = () => {
+      box1.innerText = "Double Clicked!";
+      box1.style.backgroundColor = "orange";
+    };
+
+    box2.onmouseover = () => {
+      box2.innerText = "Mouse Over!";
+      box2.style.backgroundColor = "yellow";
+    };
+    box3.onmousemove = () => {
+      box3.innerText = "Mouse Moving!";
+      box3.style.backgroundColor = "pink";
+    };
+
+    box4.onmouseout = () => {
+      box4.innerText = "Mouse Out!";
+      box4.style.backgroundColor = "lightblue";
+    };
+
+    box5.onmousedown = () => {
+      box5.innerText = "Mouse Down!";
+      box5.style.backgroundColor = "red";
+    };
+
+    box6.onmouseup = () => {
+      box6.innerText = "Mouse Up!";
+      box6.style.backgroundColor = "purple";
+    };
+  </script>
+
+
+  <script>
+    const input = document.getElementById("myInput");
+    const output = document.getElementById("output");
+
+    input.onkeydown = (e) => {
+      output.innerText = `Key Down: ${e.key}`;
+      console.log(e.key)
+    };
+
+    input.onkeyup = (e) => {
+      output.innerText = `Key Up: ${e.key}`;
+    };
+
+    input.onkeypress = (e) => {
+      output.innerText = `Key Pressed: ${e.key}`;
+    };
+  </script>
+   <h2>Form Events Demo</h2>
+
+  <form id="myForm">
+    <input type="text" id="name" placeholder="Enter your name" />
+    <input type="email" id="email" placeholder="Enter your email" />
+    <select id="country">
+      <option value="">Select Country</option>
+      <option value="India">India</option>
+      <option value="USA">USA</option>
+      <option value="UK">UK</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="output1">Event Output Will Appear Here</p>
+  <script>
+    const form = document.getElementById("myForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const countrySelect = document.getElementById("country");
+    const output1 = document.getElementById("output1");
+
+    form.onsubmit = (e) => {
+      e.preventDefault(); 
+      output1.innerText = `Form Submitted! Name: ${nameInput.value}, Email: ${emailInput.value}`;
+    };
+
+    nameInput.onfocus = () => {
+      output1.innerText = "Name input focused!";
+    };
+
+    nameInput.onblur = () => {
+      output1.innerText = "Name input lost focus!";
+    };
+
+    emailInput.oninput = () => {
+      output1.innerText = `Typing Email: ${emailInput.value}`;
+    };
+
+    countrySelect.onchange = () => {
+      output1.innerText = `Country Selected: ${countrySelect.value}`;
+    };
+  </script>
+
+</body>
+</html>
+
+
+
