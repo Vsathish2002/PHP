@@ -1,36 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custome Event</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom Event Form Validation</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f7f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      font-size: 14px;
+      color: #444;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #0078d7;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .error {
+      color: #d9534f;
+    }
+
+    .success {
+      color: #28a745;
+    }
+  </style>
 </head>
 <body>
-    <button id="btn">Click me</button>
-    <div id="output">Waiting for event...</div>
-    <script>
-        const btn=document.getElementById("btn");
-        const output = document.getElementById("output");
+  <div class="container">
+    <h2>Register</h2>
+    <form id="myForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
 
-        const msg=new CustomEvent("custom",{detail:{
-            message:"Hi this is custom Event",
-            message2:"This is  also custom Event",
-            color:"red"
-        }})
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email">
 
-        document.addEventListener("custom",(e)=>{
-            output.innerHTML=`Waiting... ${e.detail.message}`;
-            alert(`${e.detail.message2}`);
-            output.style.color=e.detail.color
+      <button type="submit">Submit</button>
+    </form>
+    <div id="output" class="message">Fill the form...</div>
+  </div>
+
+  <script>
+    const form = document.getElementById("myForm");
+    const output = document.getElementById("output");
 
 
-        })
+    function createValidationEvent(data) {
+      return new CustomEvent("formValidation", { detail: data });
+    }
 
-        btn.onclick=()=>{
-            document.dispatchEvent(msg)
-        }
-        
-    </script>
-    
+ 
+    document.addEventListener("formValidation", (e) => {
+      const { name, email } = e.detail;
+
+      if (!name || !email) {
+        output.textContent = "❌ Please fill in all fields.";
+        output.className = "message error";
+        alert("Please fill in all fields!");
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        output.textContent = "❌ Enter a valid email address.";
+        output.className = "message error";
+        alert("Invalid email format!");
+      } else {
+        output.textContent = "✅ Form submitted successfully!";
+        output.className = "message success";
+        alert("Form submitted successfully!");
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+
+      document.dispatchEvent(createValidationEvent({ name, email }));
+    });
+  </script>
 </body>
 </html>

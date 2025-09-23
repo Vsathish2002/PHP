@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance </title>
+</head>
+<body>
+    <h2>Student Details</h2>
+    <p id="demo"></p>
+
+    <script>
+        class Person {  
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            greet() { 
+                return `Hi, I am ${this.name} and I am ${this.age} years old.`;
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, age, course) {
+                super(name, age); 
+                this.course = course;
+            }
+            study() {
+                return `${this.name} is studying ${this.course}.`;
+            }
+        }
+
+        const student1 = new Student("Karthi", 22, "BCA");
+
+        const demo = document.getElementById('demo');
+        demo.innerHTML = student1.greet() + "<br>" + student1.study();
+    </script>
+</body>
+</html>
