@@ -3,41 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polymorphism Demo</title>
+    <title>Polymorphism with Alt Method</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2 { color: #333; }
+        #demo { margin-top: 15px; line-height: 1.6; }
+    </style>
 </head>
 <body>
-    <h2>Vehicle Actions</h2>
-    <p id="demo"></p>
+    <h2>Vehicle Actions with Pre-Move Alt Method</h2>
+    <p id="demo">Actions will appear below:</p>
 
     <script>
-        // Parent class
         class Vehicle {
+            alt() {
+                const event = new CustomEvent("preMove", {
+                    detail: { vehicle: "Vehicle", message: "Vehicle is preparing to move..." }
+                });
+                document.dispatchEvent(event);
+            }
             move() {
+                this.alt(); 
                 return "Vehicle is moving.";
             }
         }
 
-        // Child class 1
         class Car extends Vehicle {
+            alt() {
+                const event = new CustomEvent("preMove", {
+                    detail: { vehicle: "Car", message: "Car is warming up engine..." }
+                });
+                document.dispatchEvent(event);
+            }
             move() {
+                super.move(); 
                 return "Car is driving on the road.";
             }
         }
 
-        // Child class 2
         class Bike extends Vehicle {
+            alt() {
+                const event = new CustomEvent("preMove", {
+                    detail: { vehicle: "Bike", message: "Bike is checking brakes and gears..." }
+                });
+                document.dispatchEvent(event);
+            }
             move() {
+                super.move();
                 return "Bike is speeding on the highway.";
             }
         }
 
-        const demo = document.getElementById("demo");
+        document.addEventListener("preMove", (e) => {
+            const demo = document.getElementById("demo");
+            demo.innerHTML += `${e.detail.vehicle}: ${e.detail.message}<br>`;
+        });
+
+        function showMove(vehicleName, action) {
+            const demo = document.getElementById("demo");
+            demo.innerHTML += `${vehicleName}: ${action}<br>`;
+        }
+
         const vehicle = new Vehicle();
         const car = new Car();
         const bike = new Bike();
-        demo.innerHTML = vehicle.move() + "<br>" +
-                         car.move() + "<br>" +
-                         bike.move();
+
+        showMove("Vehicle", vehicle.move());
+        showMove("Car", car.move());
+        showMove("Bike", bike.move());
     </script>
 </body>
 </html>
