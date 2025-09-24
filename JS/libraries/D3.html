@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <svg width="900" height="200"></svg>
+
+  <script>
+    const data = [30, 80, 45, 60, 20, 90, 100];
+
+    const svg = d3.select("svg");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+
+    const xScale = d3.scaleBand()
+      .domain(data.map((d, i) => i))
+      .range([0, width])
+      .padding(0.2);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(data)])
+      .range([height, 0]);
+
+    svg.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => xScale(i))
+      .attr("y", d => yScale(d))
+      .attr("width", xScale.bandwidth())
+      .attr("height", d => height - yScale(d))
+      .attr("fill", "steelblue");
+  </script>
+</body>
+</html>

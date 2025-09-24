@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Popper.js Example</title>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <style>
+    button {
+      margin: 100px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #tooltip {
+      background-color: black;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      visibility: hidden;
+      position: absolute;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="btn">Hover me</button>
+  <div id="tooltip">I am a tooltip!</div>
+
+  <script>
+    const button = document.getElementById('btn');
+    const tooltip = document.getElementById('tooltip');
+
+    const popperInstance = Popper.createPopper(button, tooltip, {
+      placement: 'top', // top, bottom, left, right
+    });
+
+    button.addEventListener('mouseenter', () => {
+      tooltip.style.visibility = 'visible';
+      popperInstance.update();
+    });
+
+    button.addEventListener('mouseleave', () => {
+      tooltip.style.visibility = 'hidden';
+    });
+  </script>
+</body>
+</html>

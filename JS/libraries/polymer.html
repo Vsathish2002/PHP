@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Polymer Example</title>
+  <script src="https://unpkg.com/@polymer/polymer@3.4.1/polymer.js"></script>
+</head>
+<body>
+  <hello-world></hello-world>
+
+  <script type="module">
+    import { PolymerElement, html } from 'https://unpkg.com/@polymer/polymer@3.4.1/polymer-element.js';
+
+    class HelloWorld extends PolymerElement {
+      static get template() {
+        return html`
+          <style>
+            h2 { color: teal; font-family: Arial; }
+          </style>
+          <h2>Hello, Polymer!</h2>
+        `;
+      }
+    }
+
+    customElements.define('hello-world', HelloWorld);
+  </script>
+</body>
+</html>

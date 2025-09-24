@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lodash Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+</head>
+<body>
+  <h2>Lodash Example: Filter and Sort</h2>
+  <div id="output"></div>
+
+  <script>
+    const users = [
+      { name: "Alice", age: 25 },
+      { name: "Bob", age: 30 },
+      { name: "Charlie", age: 20 },
+      { name: "David", age: 35 }
+    ];
+
+    // Filter users with age > 25
+    const filtered = _.filter(users, u => u.age > 10);
+
+    // Sort users by age ascending
+    const sorted = _.sortBy(filtered, 'age');
+
+    const output = document.getElementById("output");
+    sorted.forEach(u => {
+      output.innerHTML += `Name: ${u.name}, Age: ${u.age}<br>`;
+    });
+  </script>
+</body>
+</html>

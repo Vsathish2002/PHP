@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Algolia Places Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/places.js@1.19.0/dist/cdn/places.min.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { color: #333; }
+    #details { margin-top: 20px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h2>Search for a Place</h2>
+  <input type="search" id="address-input" placeholder="Type an address">
+  
+  <div id="details">Selected place details will appear here.</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+  <script>
+    const placesAutocomplete = places({
+      appId: '74FP83WKRO',  // Your Algolia Places App ID
+      apiKey: '7a5b2da033e8622525a990123446d945', // Your Algolia Places API Key
+      container: document.querySelector('#address-input')
+    });
+
+    const detailsDiv = document.getElementById('details');
+
+    placesAutocomplete.on('change', function(e) {
+      const s = e.suggestion;
+      detailsDiv.innerHTML = `
+        <strong>Name:</strong> ${s.name} <br>
+        <strong>City:</strong> ${s.city || '-'} <br>
+        <strong>Country:</strong> ${s.country || '-'} <br>
+        <strong>Postcode:</strong> ${s.postcode || '-'} <br>
+        <strong>Latitude:</strong> ${s.latlng.lat} <br>
+        <strong>Longitude:</strong> ${s.latlng.lng}
+      `;
+    });
+  </script>
+</body>
+</html>
