@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moment.js Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body>
+  <h2>Moment.js Demo</h2>
+  <p id="current-time"></p>
+  <p id="add-days"></p>
+  <p id="from-now"></p>
+
+  <script>
+    // Current date and time
+    const now = moment();
+    document.getElementById('current-time').innerText = "Current time: " + now.format('MMMM Do YYYY, h:mm:ss a');
+
+    // Add 7 days
+    const nextWeek = now.add(7, 'days');
+    document.getElementById('add-days').innerText = "Date after 7 days: " + nextWeek.format('MMMM Do YYYY');
+
+    // Relative time
+    const birthday = moment('2025-09-30');
+    document.getElementById('from-now').innerText = "Birthday is " + birthday.fromNow();
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Integrated Table, Chart & Map</title>
+  <!-- Flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #chart { width: 100%; height: 300px; margin-top: 20px; }
+    #map { width: 100%; height: 400px; margin-top: 20px; }
+    #clearDate { margin-left: 10px; padding: 5px 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>Select Date</h2>
+  <input type="text" id="datepicker" placeholder="Choose a date">
+  <button id="clearDate">Clear Date</button>
+
+  <h2>DataTable</h2>
+  <table id="example" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Sales</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>Sales Chart</h2>
+  <div id="chart"></div>
+
+  <h2>Map</h2>
+  <div id="map"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    let table, allData, chart, map, markersLayer;
+
+    flatpickr("#datepicker", {
+      dateFormat: "Y-m-d",
+      onChange: function(selectedDates, dateStr) {
+        filterData(dateStr);
+      }
+    });
+
+    document.getElementById("clearDate").addEventListener("click", function() {
+      document.getElementById("datepicker").value = "";
+      filterData("");
+    });
+
+    async function loadData() {
+      try {
+        const response = await fetch("data.json");
+        allData = await response.json();
+
+        const tbody = document.querySelector("#example tbody");
+        allData.forEach(item => {
+          const row = `<tr>
+            <td>${item.Name}</td>
+            <td>${item.Age}</td>
+            <td>${item.Latitude}</td>
+            <td>${item.Longitude}</td>
+            <td>${item.Sales}</td>
+            <td>${item.Date}</td>
+          </tr>`;
+          tbody.innerHTML += row;
+        
+
+        table = $('#example').DataTable();
+
+        chart = echarts.init(document.getElementById("chart"));
+        updateChart(allData);
+
+        map = L.map('map').setView([20, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        markersLayer = L.layerGroup().addTo(map);
+        updateMap(allData);
+
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
+    }
+    function filterData(selectedDate) {
+      let filtered = selectedDate ? allData.filter(d => d.Date === selectedDate) : allData;
+
+      table.clear();
+      filtered.forEach(item => {
+        table.row.add([item.Name, item.Age, item.Latitude, item.Longitude, item.Sales, item.Date]);
+      });
+      table.draw();
+
+      updateChart(filtered);
+
+      updateMap(filtered);
+    }
+
+    function updateChart(data) {
+      const names = data.map(d => d.Name);
+      const sales = data.map(d => d.Sales);
+
+      const option = {
+        title: { text: "Sales by Person" },
+        tooltip: {},
+        xAxis: { type: "category", data: names },
+        yAxis: { type: "value" },
+        series: [{ name: "Sales", type: "bar", data: sales }]
+      };
+
+      chart.setOption(option);
+    }
+
+    function updateMap(data) {
+      markersLayer.clearLayers();
+
+      data.forEach(item => {
+        const popupText = `<b>${item.Name}</b><br>Sales: ${item.Sales}<br>Date: ${item.Date}`;
+        L.marker([item.Latitude, item.Longitude]).bindPopup(popupText).addTo(markersLayer);
+      });
+
+      if (data.length) {
+        const bounds = data.map(d => [d.Latitude, d.Longitude]);
+        map.fitBounds(bounds, { padding: [50, 50] });
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
