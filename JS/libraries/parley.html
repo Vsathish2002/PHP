@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parsley.js Example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/parsleyjs/src/parsley.css">
+  <script src="https://cdn.jsdelivr.net/npm/parsleyjs"></script>
+</head>
+<body>
+  <h2>Parsley.js Form Validation</h2>
+
+  <form id="demo-form" data-parsley-validate>
+    <label for="name">Name (required):</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email (required & valid):</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="age">Age (number between 18-60):</label><br>
+    <input type="number" id="age" name="age" min="18" max="60"><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Initialize Parsley on the form
+    const form = document.getElementById('demo-form');
+    $(form).parsley();
+  </script>
+</body>
+</html>

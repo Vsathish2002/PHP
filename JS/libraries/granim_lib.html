@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Granim.js Working Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/granim"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    h1 {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gradient-canvas" width="800" height="600"></canvas>
+  <h1>Animated Gradient Background</h1>
+
+  <script>
+    const granimInstance = new Granim({
+      element: '#gradient-canvas',
+      direction: 'diagonal',
+      isPausedWhenNotInView: true,
+      states: {
+        "default-state": {
+          gradients: [
+            ['#ff9966', '#ff5e62'],
+            ['#00F260', '#0575E6'],
+            ['#e1eec3', '#f05053']
+          ],
+          transitionSpeed: 4000
+        }
+      }
+    });
+  </script>
+</body>
+</html>

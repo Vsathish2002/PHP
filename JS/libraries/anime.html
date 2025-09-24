@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anime.js Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background: steelblue;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+
+  <script>
+    anime({
+      targets: '#box',
+      translateX: 600,      // move 300px to the right
+      translateY: 400,      // move 200px down
+      rotate: '5turn',      // rotate 360 degrees
+      backgroundColor: '#FF6347',
+      duration: 9000,       // 2 seconds
+      loop: true,           // repeat forever
+      direction: 'alternate' // back and forth
+    });
+  </script>
+</body>
+</html>

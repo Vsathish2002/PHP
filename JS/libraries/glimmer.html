@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Glimmer.js Example</title>
+  <script src="https://unpkg.com/@glimmer/component@1.0.0/dist/glimmer-component.js"></script>
+  <script src="https://unpkg.com/@glimmer/tracking@1.0.0/dist/glimmer-tracking.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import Component from 'https://unpkg.com/@glimmer/component@1.0.0/dist/glimmer-component.js';
+    import { tracked } from 'https://unpkg.com/@glimmer/tracking@1.0.0/dist/glimmer-tracking.js';
+
+    class Counter extends Component {
+      @tracked count = 0;
+
+      increment() {
+        this.count++;
+      }
+    }
+
+    const app = document.getElementById('app');
+
+    function renderCounter() {
+      app.innerHTML = `
+        <div>
+          <h2>Counter: ${Counter.prototype.count || 0}</h2>
+          <button id="incBtn">Increment</button>
+        </div>
+      `;
+
+      document.getElementById('incBtn').onclick = () => {
+        Counter.prototype.count++;
+        renderCounter();
+      };
+    }
+
+    renderCounter();
+  </script>
+</body>
+</html>
