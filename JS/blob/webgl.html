@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Efficient WebGL Triangle</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; background: #222; width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+<canvas id="glCanvas"></canvas>
+<script>
+
+const canvas = document.getElementById('glCanvas');
+const gl = canvas.getContext('webgl');
+
+if (!gl) alert('WebGL not supported');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const vsSource = `
+attribute vec4 aVertexPosition;
+uniform float uRotation;
+void main(void) {
+  float c = cos(uRotation);
+  float s = sin(uRotation);
+  gl_Position = vec4(
+    aVertexPosition.x * c - aVertexPosition.y * s,
+    aVertexPosition.x * s + aVertexPosition.y * c,
+    aVertexPosition.z,
+    1.0
+  );
+}
+`;
+
+
+const fsSource = `void main(void) { gl_FragColor = vec4(0.0, 0.7, 1.0, 1.0); }`;
+function createShader(type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error('Shader error:', gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+}
+
+const vertexShader = createShader(gl.VERTEX_SHADER, vsSource);
+const fragmentShader = createShader(gl.FRAGMENT_SHADER, fsSource);
+
+const program = gl.createProgram();
+gl.attachShader(program, vertexShader);
+gl.attachShader(program, fragmentShader);
+gl.linkProgram(program);
+gl.useProgram(program);
+
+
+const vertices = new Float32Array([0,0.5,0, -0.5,-0.5,0, 0.5,-0.5,0]);
+const vertexBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+const positionAttrib = gl.getAttribLocation(program, 'aVertexPosition');
+gl.enableVertexAttribArray(positionAttrib);
+gl.vertexAttribPointer(positionAttrib, 3, gl.FLOAT, false, 0, 0);
+
+const rotationUniform = gl.getUniformLocation(program, 'uRotation');
+
+let angle = 0;
+function draw() {
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  angle += 0.02;
+  gl.uniform1f(rotationUniform, angle);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  requestAnimationFrame(draw);
+}
+
+gl.clearColor(0.1, 0.1, 0.1, 1.0);
+draw();
+</script>
+</body>
+</html>
