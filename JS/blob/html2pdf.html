@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML to PDF Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    #content {
+      width: 500px;
+      padding: 20px;
+      border: 1px solid #333;
+      font-family: Arial, sans-serif;
+    }
+    h1 { color: teal; }
+    p { font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<div id="content">
+  <h1>My PDF Content</h1>
+  <p>This is an example of converting HTML to PDF using html2pdf.js.</p>
+</div>
+
+<button id="download">Download PDF</button>
+
+<script>
+document.getElementById('download').addEventListener('click', () => {
+  const element = document.getElementById('content');
+  html2pdf().from(element).save();
+});
+</script>
+
+</body>
+</html>

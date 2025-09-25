@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cleave.js Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+</head>
+<body>
+  <h2>Credit Card Input</h2>
+  <input type="text" id="phone" placeholder="+91 12345 67890">
+<script>
+  const phoneCleave = new Cleave('#phone', {
+    phone: true,
+    phoneRegionCode: 'IN'
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+[
+  {"Name":"Sathish","Age":25,"Latitude":51.5074,"Longitude":-0.1278,"Sales":500,"Date":"2025-09-01"},
+  {"Name":"John"   ,"Age":30,"Latitude":55.9533,"Longitude":-3.1883,"Sales":700,"Date":"2025-09-02"},
+  {"Name":"Rock"   ,"Age":48,"Latitude":40.7128,"Longitude":-74.0060,"Sales":800,"Date":"2025-09-03"},
+  {"Name":"Rahul"  ,"Age":24,"Latitude":48.8566,"Longitude":2.3522,"Sales":600,"Date":"2025-09-01"},
+  {"Name":"Sara"   ,"Age":28,"Latitude":34.0522,"Longitude":-118.2437,"Sales":900,"Date":"2025-09-03"},
+  {"Name":"Emma"   ,"Age":32,"Latitude":41.9028,"Longitude":12.4964,"Sales":550,"Date":"2025-09-02"},
+  {"Name":"Liam","Age":29,"Latitude":52.52,"Longitude":13.4050,"Sales":720,"Date":"2025-09-01"},
+  {"Name":"Olivia","Age":27,"Latitude":59.3293,"Longitude":18.0686,"Sales":680,"Date":"2025-09-03"},
+  {"Name":"Noah","Age":35,"Latitude":45.4642,"Longitude":9.1900,"Sales":810,"Date":"2025-09-02"},
+  {"Name":"Ava","Age":26,"Latitude":48.2082,"Longitude":16.3738,"Sales":770,"Date":"2025-09-01"},
+  {"Name":"Ethan","Age":31,"Latitude":50.1109,"Longitude":8.6821,"Sales":640,"Date":"2025-09-03"},
+  {"Name":"Sophia","Age":29,"Latitude":55.7558,"Longitude":37.6173,"Sales":890,"Date":"2025-09-02"},
+  {"Name":"Mason","Age":33,"Latitude":43.6532,"Longitude":-79.3832,"Sales":720,"Date":"2025-09-01"},
+  {"Name":"Isabella","Age":28,"Latitude":35.6895,"Longitude":139.6917,"Sales":810,"Date":"2025-09-03"},
+  {"Name":"Lucas","Age":36,"Latitude":37.7749,"Longitude":-122.4194,"Sales":650,"Date":"2025-09-02"},
+  {"Name":"Mia","Age":27,"Latitude":51.1657,"Longitude":10.4515,"Sales":790,"Date":"2025-09-01"},
+  {"Name":"Logan","Age":34,"Latitude":40.4168,"Longitude":-3.7038,"Sales":830,"Date":"2025-09-03"},
+  {"Name":"Charlotte","Age":30,"Latitude":60.1695,"Longitude":24.9354,"Sales":710,"Date":"2025-09-02"},
+  {"Name":"James","Age":32,"Latitude":35.6762,"Longitude":139.6503,"Sales":870,"Date":"2025-09-01"},
+  {"Name":"Amelia","Age":29,"Latitude":38.7223,"Longitude":-9.1393,"Sales":760,"Date":"2025-09-03"}
+]
